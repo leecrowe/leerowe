@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Twit Predict! - {{ title }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/picnic" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="/" class="brand"><span>Twit Predict!</span></a>
+      <!-- responsive-->
+      <input id="bmenub" type="checkbox" class="show">
+      <label for="bmenub" class="burger pseudo button">Menu</label>
+      <div class="menu">
+         
+        <a href="/reset" class="button error">Reset Users</a>
+      </div>
+    </nav>
+    <article class="flex two" style="padding: 3em 1em;">
+      {% block content %}
+      <div>
+        <h1>{{ title }}</h1>
+        <form action="/compare" method="post">
+          <select name="user0">
+            {% for user in users %}
+            <option value="{{ user.name }}">{{ user.name }}</option>
+            {% endfor %}
+          </select>
+          <select name="user1">
+            {% for user in users %}
+            <option value="{{ user.name }}">{{ user.name }}</option>
+            {% endfor %}
+          </select>
+          <input type="text" name="tweet_text" placeholder="Type your hypothetical tweet that you want to predict here...">
+          <input type="submit" value="Compare Users">
+        </form>
+      </div>
+      <div>
+        <h2>Users</h2>
+        {% for user in users %}
+        <a href="/user/{{ user.name }}"><span class="stack">{{ user.name }}</span></a>
+        {% endfor %}
+        <form action="/user" method="post">
+          <input type="text" name="user_name" placeholder="Type the user's twitter handle here...">
+          <input type="submit" value="Add User">
+        </form>
+      </div>
+      {% endblock %}
+      <form action="https://en.wikipedia.org/wiki/List_of_most-followed_Twitter_accounts">
+        <input type="submit" value="Find Twitter Users..." />
+      </form>
+    </article>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"/> -->
+  </body>
+
+</html>
