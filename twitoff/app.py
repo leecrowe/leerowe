@@ -10,7 +10,7 @@ def create_app():
     # initilizes our application
     app = Flask(__name__)
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///db.sqlite3'
+    app.config["SQLALCHEMY_DATABASE_URI"] = getenv['DATABASE_URI']
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     DB.init_app(app)
